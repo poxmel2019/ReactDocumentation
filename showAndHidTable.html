@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Training page
+        </title>
+        <meta charset="utf-8">
+        <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+        <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+        <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+        <style>
+            table {
+                border-collapse: collapse
+            }
+            table, tr, td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div id="root">Hello, world!</div>
+        <script type="text/babel">
+        
+        class Table extends React.Component {
+            constructor() {
+                super();
+                this.state = {isOpen:false}
+                this.openTable = this.openTable.bind(this)
+
+            }
+            openTable() {
+                this.setState({isOpen:!this.state.isOpen})
+            }
+            render() {
+                if (this.state.isOpen) {
+                    var table = <div>
+                            <table>
+                            <tr>
+                                <td>Наблюдатель</td>
+                                <td>Дата и время</td>
+                                <td>Кто добавил</td>
+                                <td>Запрещено добавление наблюдателя</td>
+                            </tr>
+                            <tr>
+                                <td>Синицын Cергей</td>
+                                <td>                </td>
+                                <td>                </td>
+                                <td><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td>Айгерим Ерасилова</td>
+                                <td>17.04.2017</td>
+                                <td>Дидар Акимбаев</td>
+                                <td><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td>Олжас Болатбеков</td>
+                                <td>17.04.2017</td>
+                                <td>Дидар Акимбаев</td>
+                                <td><input type="checkbox"/></td>
+                            </tr>
+                            <tr>
+                                <td>Рахманова Камила</td>
+                                <td>15.04.2017</td>
+                                <td>Наталья Попова</td>
+                                <td><input type="checkbox"/></td>
+                            </tr>
+                        </table>
+                                </div>
+                }
+                return (
+                    <div>
+                        
+                        <button onClick={this.openTable}>Press</button>
+                        {table}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+           <Table/>,
+            document.getElementById("root")
+        )
+            
+        </script>
+    </body>
+</html>
