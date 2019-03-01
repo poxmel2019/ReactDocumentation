@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page</title>
+		<meta charset="utf-8">
+		<script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+        <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+        <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+	</head>
+	<body>
+		<div id="root"></div>
+		<script type="text/babel">
+			
+			class Hello extends React.Component {
+                constructor() {
+                    super();
+                    this.state = {num:1,fruit:"apple",fruct:null}
+
+                    this.showValue = this.showValue.bind(this)
+                    this.onSelectChange = this.onSelectChange.bind(this)
+                }
+
+                showValue(event) {
+                    this.setState({fruct:this.state.fruit})
+                } 
+                onSelectChange(event) {
+                    this.setState({fruit:event.target.value})
+
+                }
+				render() {
+					return (
+						<div>
+                            <select value={this.state.fruit} onChange={this.onSelectChange}>
+                                <option value="apple">Apple</option>
+                                <option value="orange">Orange</option>
+                                <option value="peach">Peach</option>
+                            </select>
+                            <button onClick={this.showValue}>Press</button>
+                            <label>{this.state.fruct}</label>
+                        </div>
+					)
+				}
+			}
+			
+			ReactDOM.render(
+				<Hello/>,
+				document.getElementById("root")
+			)
+		</script>
+	</body>
+</html>
