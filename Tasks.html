@@ -15,17 +15,26 @@
             class App extends React.Component {
                 constructor() {
                     super();
-                    this.state = {names: ['Kolya','Vasya','Petya']}
+                    this.state = {
+                        hrefs:
+                    [
+                        {href: '1.html', text: 'ссылка 1'},
+		                {href: '2.html', text: 'ссылка 2'},
+		                {href: '3.html', text: 'ссылка 3'},
+                    ]}
                 }
+
                 render() {
-                    const list = this.state.names.map((name, index) => {
-                        return <li key={index}>{name} {index+1}</li>
-                    })
+                    const list = this.state.hrefs.map((item,index) => {
+                        return <li key={index}>
+                            <a href={item.href}>{item.text}</a>
+                        </li>;
+                    });
                     return (
                         <div>
-                            <ul>
-                                {list}
-                            </ul>
+                           <ul>
+                            {list}
+                           </ul>
                         </div>
                     )
                 }
