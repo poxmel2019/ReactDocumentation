@@ -14,32 +14,34 @@
         <script type="text/babel">
 
             class App extends React.Component {
-                
-                constructor() {
+	            constructor() {
 		        super();
 		        this.state = {items: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
-                this.deleteItem = this.deleteItem.bind(this);
-	            }
+	        }
 
-                deleteItem() {
-                    this.setState({items:this.state.items.slice(0,-1)});
-                }
+	        //Удаляем заданный элемент:
+	        deleteItem(index) {
+		        this.state.items.splice(index, 1);
+		        this.setState({items: this.state.items});
+	        }
 
-	            render() {
-		            const list = this.state.items.map((item, index) => {
-			            return <li key={index}>{item}</li>;
+	        render() {
+
+		    //Формируем набор из тегов li:
+		    const list = this.state.items.map((item, index) => {
+			    return <li key={index}>
+				    {item}
+				    <button onClick={this.deleteItem.bind(this, index)}>
+					    удалить
+				    </button>
+			    </li>;
 		        });
 
-		        return (
-                    <div>
-                        <ol>
-			                {list}
-		                </ol>
-                        <button onClick={this.deleteItem}>удалить</button>
-                    </div>)
-	           }
-        
-            }
+		    return <ul>
+			    {list}
+		    </ul>
+	}
+}
             ReactDOM.render(
                 <App></App>,
                 document.getElementById("root")
