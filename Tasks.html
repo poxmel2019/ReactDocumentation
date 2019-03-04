@@ -18,12 +18,11 @@
                 constructor() {
 		        super();
 		        this.state = {items: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
-                this.addItem = this.addItem.bind(this);
+                this.deleteItem = this.deleteItem.bind(this);
 	            }
 
-                addItem() {
-                    this.state.items.push('пункт')
-                    this.setState({items:this.state.items})
+                deleteItem() {
+                    this.setState({items:this.state.items.slice(0,-1)});
                 }
 
 	            render() {
@@ -36,7 +35,7 @@
                         <ol>
 			                {list}
 		                </ol>
-                        <button onClick={this.addItem}>добавить</button>
+                        <button onClick={this.deleteItem}>удалить</button>
                     </div>)
 	           }
         
