@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page</title>
+        <meta charset="utf-8">
+        <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+        <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+        <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type='text/babel'>
+
+            const names = [
+			    'Синицын Cергей',
+			    'Айгерим Ерасилова',
+			    'Олжас Болатбеков',
+			    'Рахманова Камила',
+			    'Дидар Акимбаев',
+			    'Наталья Попова',
+		    ]
+            let i = 0
+            class App extends React.Component {
+                constructor(){
+                    super();
+                    this.state = {names:['Синицын Cергей','Айгерим Ерасилова','Олжас Болатбеков','Рахманова Камила','Дидар Акимбаев',
+                    'Наталья Попова'], selectedName:'', label:[]}
+                    this.handleClick = this.handleClick.bind(this)
+                    this.writeLabel = this.writeLabel.bind(this)
+                }
+
+                handleClick(event) {
+                    this.setState({selectedName:event.target.value})
+                    //console.log(this.state.selectedName)
+                    console.log(event.target.value)
+                }
+                writeLabel() {
+
+                    
+                    /*
+                    if ((this.state.selectedName) in (this.state.label)) {
+                        alert("You have already added the viewer")
+                    }
+                    else {
+                        this.state.label.push(this.state.selectedName,<br/>)
+                    }
+                    
+                    this.setState({label:this.state.label})
+                    */
+                    /*
+                    this.state.label.push(this.state.selectedName,<br/>)
+                    this.setState({label:this.state.label})
+                    */
+                    
+                    for (let i = 0; i < this.state.names.length; i++) {
+                   // let i = 0;
+                    //while (i < this.state.names.length) {
+
+                        if ((this.state.label[i])===(this.state.names[i])) {
+                            alert('ads') 
+                            console.log("includes")
+                        }
+                        else {
+                            this.state.label.push(this.state.selectedName,<br/>)
+                            break
+                        }
+                            
+    
+                        
+                        console.log(this.state.label)
+                        //i++;
+                    }
+                    
+                    this.setState({label:this.state.label})
+                   
+                }
+                
+                render() {
+                    const list = this.state.names.map((name, index) => {
+                        return <option value={name} key={index}>{name}</option>
+                        
+                    });
+
+                    return (
+                        <div>
+                            <select onChange={this.handleClick}>
+                            {list}
+                            </select>
+                            <button onClick={this.writeLabel}>Press</button>
+                            <br/>
+                            {this.state.label}
+                        </div>
+
+                    )
+                }
+            }
+            
+            ReactDOM.render(
+                <App/>,
+                document.getElementById("root")
+        )
+        </script>
+    </body>
+</html>
