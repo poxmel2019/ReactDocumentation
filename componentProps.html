@@ -14,43 +14,30 @@
         <script type='text/babel'>
             
             class App extends React.Component {
-                
                 constructor() {
                     super();
                     this.state = {name:'Tom'}
-                    this.setLabel = this.setLabel.bind(this)
                 }
-
-                setLabel(value) {
-                    this.setState({name: value})
-                }
-                
                 render() {
                     return (
                         <div>
-                            <h1>{this.state.name}</h1>
-                            <Baa name={this.state.name} setLabel={this.setLabel}/>
+                        
+                        <Baa name={this.state.name}/>
+
                         </div>
                     )
-                }
+                }    
             }
 
             class Baa extends React.Component {
-            
-                constructor() {
-                    super();
-                    this.state = {name:'John'}
-                }
-
                 render() {
                     return (
-                        <div>
-                            <button onClick={() => {this.props.setLabel(this.state.name)}}>press</button>
-                        </div>
+                        <h1>{this.props.name}</h1>
                     )
                 }
-            }
             
+            }
+
             ReactDOM.render(
                 <App/>,
                 document.getElementById("root")    
