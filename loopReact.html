@@ -13,32 +13,47 @@
         <div id='root'></div>
         <script type='text/babel'>
 
-            class App extends React.Component {
-                constructor() {
-                    super();
-                    this.state = {name:'Tom'}
-                }
-                render() {
-                    
-                    const elements = ['one','two','three']
-                    const items = []
-                    for (const [index, value] of elements.entries()) {
-                        items.push(<li key={index}> {index} {value}</li>)
-                    }
+                class App extends React.Component {
+                    constructor() {
+                        super();
+                        
+                        this.state = {
+                            elements:['one', 'two', 'three'],
+                        }
+                        
 
-                    return (
-                        <div>
-                        {items}
-                        </div>
-                    )
+                    }
+                    render() {
+                        
+                        
+                        return (
+                            <div>
+                                <ul>
+                                    {this.state.elements.map((item,index) =>(
+                                        <li key={index}>{item}</li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        )
+                    }
+                    
+  
                 }
-            }
+                
+
+                
+                ReactDOM.render(
+                    <App/>,
+                    document.getElementById('root')
+                )                
+                
+                    
+                
+            
 
             
-            ReactDOM.render(
-                <App/>,
-                document.getElementById('root')
-            )
+            
         </script>
         
         
