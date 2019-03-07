@@ -17,13 +17,17 @@
                 constructor() {
                     super();
                     this.state = {name:'Tom'}
+                    this.setName = this.setName.bind(this)
+                }
+                setName() {
+                    this.setState({name:'John'})
                 }
                 render() {
                     return (
                         <div>
                         
                         <Baa name={this.state.name}/>
-
+                        <button onClick={this.setName}>press</button>
                         </div>
                     )
                 }    
