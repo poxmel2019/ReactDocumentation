@@ -23,7 +23,7 @@
                     const elements = ['one','two','three']
                     const items = []
                     for (const [index, value] of elements.entries()) {
-                        items.push(<li key={index}>{value}</li>)
+                        items.push(<li key={index}> {index} {value}</li>)
                     }
 
                     return (
