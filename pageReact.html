@@ -16,9 +16,10 @@
             const INTERVAL = 100;
             let total = 0;
 
-            function Timer(props) {
-                const value = props.value;
-                return (
+            class Timer extends React.Component {
+                render() {
+                    const value = this.props.value;
+                    return (
                     <div>
                         <p>Timer: </p>
                         <p>
@@ -29,6 +30,8 @@
                         </p>
                     </div>
                 )
+                }
+                
             }
             function increment() {
                 total++;
