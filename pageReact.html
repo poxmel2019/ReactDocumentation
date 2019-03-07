@@ -17,8 +17,23 @@
             let total = 0;
 
             class Timer extends React.Component {
+                constructor() {
+                    super();
+                    this.state = {value:0}
+                }
+                increment() {
+                    this.setState({value:this.state.value+1});
+                }
+                     
+                componentDidMount() {
+                    this.timerID = setInterval(()=>this.increment(),1000/INTERVAL);
+                }
+
+                componentWillUnmount() {
+                    clearInterval(this.timerID);
+                }
                 render() {
-                    const value = this.props.value;
+                    const value = this.state.value;
                     return (
                     <div>
                         <p>Timer: </p>
