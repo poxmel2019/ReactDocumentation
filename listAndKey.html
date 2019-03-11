@@ -12,14 +12,21 @@
     <body>
         <div id='root'></div>
         <script type='text/babel'>
+            function NumberList(props) {
+                const numbers = props.numbers;
+                const listItems = numbers.map((number) =>
+                    <li>{number}</li>
+                );
+                return (
+                    <ul>{listItems}</ul>
+                );
+
+            }
             const numbers = [1,2,3,4,5]
-            const doubled = numbers.map((number, index) => <li key={index}>{number}</li>)
-                
-        
-        ReactDOM.render(
-            <ul>{doubled}</ul>,
-            document.getElementById('root')
-        )
+            ReactDOM.render(
+                <NumberList numbers={numbers} />,
+                document.getElementById('root')
+            )
         </script>
     </body>
 </html>
