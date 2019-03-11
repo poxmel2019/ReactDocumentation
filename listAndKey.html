@@ -12,23 +12,12 @@
     <body>
         <div id='root'></div>
         <script type='text/babel'>
-       
-        class App extends React.Component {
-            render() {
-                const numbers = [1,2,3,4,5]
-                const doubled = numbers.map((number) => <li>{number * 2}</li>)
-                console.log(doubled)
-                return (
-                    <div>
-                        <ul>
-                           {doubled}
-                        </ul>
-                    </div>
-                )
-            }
-        }
+            const numbers = [1,2,3,4,5]
+            const doubled = numbers.map((number, index) => <li key={index}>{number * 2}</li>)
+                
+        
         ReactDOM.render(
-            <App/>,
+            <ul>{doubled}</ul>,
             document.getElementById('root')
         )
         </script>
