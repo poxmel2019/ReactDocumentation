@@ -14,10 +14,12 @@
         <script type='text/babel'>
             
             class App extends React.Component {
+                
                 render() {
+                    const i = 1;
                     return (
                         <div>
-                            <h1>true</h1>
+                            <h1>{i===1 ? 'true': 'false'}</h1>
                             
                         </div>
                     )
