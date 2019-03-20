@@ -13,16 +13,37 @@
         <div id='root'></div>
         <script type='text/babel'>
 
-            class Greeter extends React.Component {
+            class ParentClass extends React.Component {
+                
+                constructor() {
+                    super();
+                    this.state = {color:'green'}
+                    
+                }
+                
+                //state = {color:'green'}
                 render() {
                     return (
-                        <h1>Hello, world!</h1>
+                        <div>
+                        <Greeter color={this.state.color}/>
+                        </div>
+                    )
+                }
+            }
+
+            class Greeter extends React.Component {
+                
+                render() {
+                    return (
+                        <div>
+                        <h1>{this.props.color}</h1>
+                        </div>
                     )
                 }
             }
 
             ReactDOM.render(
-                <Greeter greeting='Hello, world!'/>,
+                <ParentClass greeting='Hello, world!'/>,
                 document.getElementById('root')
             )
 
