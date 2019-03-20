@@ -16,10 +16,15 @@
             class App extends React.Component {
                 
                 render() {
-                    const i = 1;
+                    const sections = [1,2,3];
                     return (
                         <div>
-                            <h1>{i===1 ? 'true': 'false'}</h1>
+                            {sections.length > 0 && sections.map(n=>(
+                                /* 'key' is used by react to keep track of list items and their changes */
+                                <div key={'section-'+n}>Section {n}</div>
+                            ))
+                                
+                            }
                             
                         </div>
                     )
