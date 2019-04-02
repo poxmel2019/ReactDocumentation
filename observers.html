@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<HTML>
+    <head>
+        <title>Observers</title>
+        <meta charset='utf-8'>
+        <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+        <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+        <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    </head>
+    <body>
+        <div id='root'></div>
+        <script type='text/babel'>
+            class Baa extends React.Component {
+                constructor() {
+                    super();
+                    
+                    this.state = {observers:['Синицын Cергей',
+                                'Айгерим Ерасилова',
+                                'Олжас Болатбеков',
+                                'Рахманова Камила',
+                                'Дидар Акимбаев',
+                                'Наталья Попова'], selectedName:'Синицын Cергей', observersPlace:[]
+                    }
+                    
+                   /*
+                    this.state = {observers:[{name:'Синицын Cергей',data:new Date().toLocaleString()},
+                                {name:'Айгерим Ерасилова',data:new Date().toLocaleString()},
+                                {name:'Олжас Болатбеков',data:new Date().toLocaleString()},
+                                {name:'Рахманова Камила',data:new Date().toLocaleString()},
+                                {name:'Дидар Акимбаев',data:new Date().toLocaleString()},
+                                {name:'Наталья Попова',data:new Date().toLocaleString()}], 
+                                selectedName:'Синицын Cергей', observersPlace:[]
+                    }
+                    */
+                    this.handleClick = this.handleClick.bind(this)
+                    this.addObservers = this.addObservers.bind(this)
+                    this.removeObservers = this.removeObservers.bind(this)
+
+                }
+                handleClick(event) {
+                    this.setState({selectedName:event.target.value})
+                }
+                addObservers() {
+                    this.state.observersPlace.push(this.state.selectedName)
+                    this.setState({observersPlace:this.state.observersPlace})
+                    console.log(this.state.observers)
+                
+                   
+                }
+                removeObservers() {
+                    this.setState({observersPlace:[]})
+                    console.log(this.state.observersPlace)
+                }
+                render() {
+                    const list_of_observers = this.state.observers.map((name,index) => 
+                        <option name={name} key={index}>{name}</option>)
+                    const list = this.state.observersPlace.map((name,index) =>
+                        <li name={name} key={index}>{name}</li>
+                    )
+
+                    return (
+                        
+                        <div>
+                            <select onChange={this.handleClick}>{list_of_observers}</select>
+                            <button onClick={this.addObservers}>Press</button>
+                            <button onClick={this.removeObservers}>Cancel</button>
+                            <ol>{list}</ol>
+                        </div>
+                    )
+                    }
+                }       
+                
+
+            class App extends React.Component {
+                render() {
+                    return (
+                        <div>
+                        <Baa/>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <App />,
+                document.getElementById('root')
+            )
+        </script>
+        
+    </body>
+</HTML>
