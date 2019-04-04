@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page</title>
+        <meta charset='utf-8'>
+        <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+        <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+        <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>  
+    </head>
+    <body>
+        <div id='root'></div>
+        <script type='text/babel'>
+            class Baa extends React.Component {
+                constructor() {
+                    super();
+                    this.state = {userAnswer:'',displayedAnswer:''}
+                    this.handleValue = this.handleValue.bind(this);
+                    this.submitAnswer = this.submitAnswer.bind(this);
+                }
+                handleValue(event) {
+                    this.setState({userAnswer:event.target.value})
+                    console.log(typeof(this.state.userAnswer))
+                }
+                submitAnswer() {
+                    
+                    (this.state.userAnswer === '2') ? this.setState({displayedAnswer:'Correct'}) : this.setState({displayedAnswer:'Wrong'})
+                    //this.setState({displayedAnswer:this.state.userAnswer})
+                }
+                render() {
+                    return (
+                        <div>
+                        <input type='text' onChange={this.handleValue}/>
+                        <h1>{this.props.name}</h1>
+                        <p><button onClick={this.submitAnswer}>Submit</button></p>
+                        <p>{this.state.displayedAnswer}</p>
+                        </div>
+                    )
+                }
+            }
+            class App extends React.Component {
+
+                render() {
+                    return (
+                        <div>
+                        <h1>1 + 1 = ?</h1>
+                        <Baa/>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <App/>,
+                document.getElementById('root')
+            )
+        
+        </script>
+        
+        
+    </body>
+</html>
