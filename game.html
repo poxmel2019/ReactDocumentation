@@ -15,23 +15,46 @@
             class Baa extends React.Component {
                 constructor() {
                     super();
-                    this.state = {userAnswer:'',displayedAnswer:''}
+
+                    this.state = {
+                        userAnswer:'',
+                        displayedAnswer:'',
+                        tasks:['1 + 1','1 - 1','1 * 1','1 / 1'],
+                        rightAnswers:['2','0','1','1'],
+                        counter:0
+                    }
                     this.handleValue = this.handleValue.bind(this);
                     this.submitAnswer = this.submitAnswer.bind(this);
+                    this.admitValue = this.admitValue.bind(this);
                 }
                 handleValue(event) {
                     this.setState({userAnswer:event.target.value})
                     console.log(typeof(this.state.userAnswer))
                 }
+                admitValue(event) {
+                    if (event.key==='Enter') {
+                        event.target.value === '2' ? this.setState({displayedAnswer:'Correct'}) : this.setState({displayedAnswer:'Wrong'})
+                    }
+                }
                 submitAnswer() {
+                    console.log(this.state.counter)
+                    console.log(this.state.tasks[this.state.counter])
+                    this.setState({counter:this.state.counter+1})
+                    if (this.state.userAnswer === this.state.rightAnswers[this.state.counter]) {
+                        this.setState({displayedAnswer:'Correct'}) 
+                    } else {
+                        this.setState({displayedAnswer:'Wrong'})
+                    }
                     
-                    (this.state.userAnswer === '2') ? this.setState({displayedAnswer:'Correct'}) : this.setState({displayedAnswer:'Wrong'})
-                    //this.setState({displayedAnswer:this.state.userAnswer})
                 }
                 render() {
+                    
                     return (
                         <div>
-                        <input type='text' onChange={this.handleValue}/>
+                        <ol>
+                        <li>{this.state.tasks[this.state.counter]}</li>
+                        </ol>
+                        <input type='text' onChange={this.handleValue} onKeyPress={this.admitValue}/>
                         <h1>{this.props.name}</h1>
                         <p><button onClick={this.submitAnswer}>Submit</button></p>
                         <p>{this.state.displayedAnswer}</p>
@@ -40,11 +63,17 @@
                 }
             }
             class App extends React.Component {
-
+                constructor() {
+                        super();
+                        this.state = {
+                            tasks:['1 + 1','1 - 1','1 * 1','1 / 1'],
+                            rightAnswers:['2','0','1','1']
+                        }
+                }
                 render() {
+                    
                     return (
                         <div>
-                        <h1>1 + 1 = ?</h1>
                         <Baa/>
                         </div>
                     )
