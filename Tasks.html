@@ -12,36 +12,25 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-
+			// 1 | Lesson 6 
             class App extends React.Component {
-	            constructor() {
-		        super();
-		        this.state = {items: ['Коля', 'Вася', 'Петя', 'Иван', 'Дима']};
-	        }
-
-	        //Удаляем заданный элемент:
-	        deleteItem(index) {
-		        this.state.items.splice(index, 1);
-		        this.setState({items: this.state.items});
-	        }
-
-	        render() {
-
-		    //Формируем набор из тегов li:
-		    const list = this.state.items.map((item, index) => {
-			    return <li key={index}>
-				    {item}
-				    <button onClick={this.deleteItem.bind(this, index)}>
-					    удалить
-				    </button>
-			    </li>;
-		        });
-
-		    return <ul>
-			    {list}
-		    </ul>
-	}
-}
+				constructor() {
+					super();
+					this.state = {label:''}
+					this.handleClick = this.handleClick.bind(this);
+				}
+				handleClick(event) {
+					this.setState({label:event.target.value})
+				}
+				render() {
+					return (
+						<div>
+						<input type='text' onChange={this.handleClick}/>
+						<p>{this.state.label}</p>
+						</div>
+					)
+				}
+			}
             ReactDOM.render(
                 <App></App>,
                 document.getElementById("root")
