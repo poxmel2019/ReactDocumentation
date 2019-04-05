@@ -19,9 +19,10 @@
                     this.state = {
                         userAnswer:'',
                         displayedAnswer:'',
-                        tasks:['1 + 1','1 - 1','1 * 1','1 / 1'],
-                        rightAnswers:['2','0','1','1'],
-                        counter:0
+                        counter:0,
+                        quantityOfRightAnswers:0,
+                        bulin:false
+                        
                     }
                     this.handleValue = this.handleValue.bind(this);
                     this.submitAnswer = this.submitAnswer.bind(this);
@@ -29,7 +30,7 @@
                 }
                 handleValue(event) {
                     this.setState({userAnswer:event.target.value})
-                    console.log(typeof(this.state.userAnswer))
+                   
                 }
                 admitValue(event) {
                     if (event.key==='Enter') {
@@ -38,12 +39,21 @@
                 }
                 submitAnswer() {
                     console.log(this.state.counter)
-                    console.log(this.state.tasks[this.state.counter])
+                    console.log(this.props.tasks[this.state.counter])
                     this.setState({counter:this.state.counter+1})
-                    if (this.state.userAnswer === this.state.rightAnswers[this.state.counter]) {
-                        this.setState({displayedAnswer:'Correct'}) 
-                    } else {
-                        this.setState({displayedAnswer:'Wrong'})
+                    if (this.state.userAnswer === this.props.rightAnswers[this.state.counter]) {
+                        console.log('Right')
+                        this.setState({
+                        quantityOfRightAnswers:this.state.quantityOfRightAnswers+1,
+                        })
+                    }  
+                    else {
+                        console.log('Wrong')
+                    }
+                    
+                    if (this.state.counter === this.props.tasks.length) {
+                        this.setState({bulin:true, displayedAnswer:"Correct answers: "+this.state.quantityOfRightAnswers
+                        +"\nWrong answers : "+(this.state.counter-this.state.quantityOfRightAnswers)});
                     }
                     
                 }
@@ -51,12 +61,9 @@
                     
                     return (
                         <div>
-                        <ol>
-                        <li>{this.state.tasks[this.state.counter]}</li>
-                        </ol>
+                        <h2>{this.props.tasks[this.state.counter]}</h2>
                         <input type='text' onChange={this.handleValue} onKeyPress={this.admitValue}/>
-                        <h1>{this.props.name}</h1>
-                        <p><button onClick={this.submitAnswer}>Submit</button></p>
+                        <p><button disabled={this.state.bulin} onClick={this.submitAnswer}>Submit</button></p>
                         <p>{this.state.displayedAnswer}</p>
                         </div>
                     )
@@ -74,7 +81,7 @@
                     
                     return (
                         <div>
-                        <Baa/>
+                        <Baa tasks={this.state.tasks} rightAnswers={this.state.rightAnswers}/>
                         </div>
                     )
                 }
