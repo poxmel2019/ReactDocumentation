@@ -12,7 +12,7 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-			// 1 | Lesson 6 
+			// 3 | Lesson 6 
             class App extends React.Component {
 				constructor() {
 					super();
@@ -21,12 +21,13 @@
 				}
 				handleClick(event) {
 					this.setState({label:event.target.value})
+					
 				}
 				render() {
 					return (
 						<div>
 						<input type='text' onChange={this.handleClick}/>
-						<p>{this.state.label.toUpperCase()}</p>
+						<p>{2019-this.state.label}</p>
 						</div>
 					)
 				}
