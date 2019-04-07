@@ -12,22 +12,37 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-			// 3 | Lesson 6 
+			// 4 | Lesson 6 
             class App extends React.Component {
 				constructor() {
 					super();
-					this.state = {label:''}
-					this.handleClick = this.handleClick.bind(this);
+					this.state = {paragraph1:'',paragraph2:'',paragraph3:'',count:0,paragraphs:[]}
+					//this.handleClick = this.handleClick.bind(this);
+					this.pressSpace = this.pressSpace.bind(this);
 				}
-				handleClick(event) {
-					this.setState({label:event.target.value})
+				
+				pressSpace(event) {
+					let massiv = []
+					let $count = this.state.count;
+					if (event.key===' ') {
+						massiv.push(event.target.value)
+						this.setState({count:$count+1})
+						console.log($count)
+					}
+					switch ($count){
+						case 1: this.setState({paragraph1:massiv[0]}); break;
+						case 2: this.setState({paragraph2:massiv[1]}); break;
+						case 3: this.setState({paragraph3:massiv[2]}); break;
+					}
+				}
 					
-				}
 				render() {
 					return (
 						<div>
-						<input type='text' onChange={this.handleClick}/>
-						<p>{new Date().getFullYear()-this.state.label}</p>
+						<input type='text' onChange={this.handleClick} onKeyPress={this.pressSpace}/>  {/*onKeyPress={this.pressSpace}/>*/}
+						<p>{this.state.paragraph1}</p>
+						<p>{this.state.paragraph2}</p>
+						<p>{this.state.paragraph3}</p>
 						</div>
 					)
 				}
