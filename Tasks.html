@@ -18,7 +18,8 @@
 					super();
 					this.state = {arrayOfNames:['Alexander','Andrew','Alexey'],inputValue:'',}
 					this.handleOnChange = this.handleOnChange.bind(this);
-					this.handleOnClick = this.handleOnClick.bind(this);
+					this.addName = this.addName.bind(this);
+					this.deleteName = this.deleteName.bind(this);
 					
 				}
 				
@@ -27,19 +28,23 @@
 					this.setState({inputValue:event.target.value})
 				}
 
-				handleOnClick() {
+				addName() {
 					this.state.arrayOfNames.push(this.state.inputValue)
 					this.setState({arrayOfNames:this.state.arrayOfNames})
+				}
+				deleteName() {
+					//this.state.arrayOfNames.pop()
+					this.setState({arrayOfNames:this.state.arrayOfNames.slice(0, -1)})
 				}
 				render() {
 					return (
 						<div>	
 							<input type='text' onChange={this.handleOnChange}/>
-							<button onClick={this.handleOnClick}>Add</button>
+							<button onClick={this.addName}>Add</button>
 								<ol>
                                         
 										{this.state.arrayOfNames.map((item,index) => (
-											<li key={index} name={item}>{item}</li>
+											<li key={index} name={item}>{item} <button onClick={this.deleteName}>x</button></li>
 										))}
 									</ol>
 	
