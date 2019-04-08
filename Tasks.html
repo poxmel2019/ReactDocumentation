@@ -12,44 +12,37 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-			// 6 | Lesson 6
+			// 7 | Lesson 6
             class App extends React.Component {
 				constructor() {
 					super();
-					this.state = {label:'',inputValueFirst:'',inputValueSecond:'',inputValueThird:''}
-					this.handleChange = this.handleChange.bind(this);
-					this.handleChangeSecond = this.handleChangeSecond.bind(this);
-					this.handleChangeThird = this.handleChangeThird.bind(this);
-					this.handleClick = this.handleClick.bind(this);
+					this.state = {arrayOfNames:['Alexander','Andrew','Alexey'],inputValue:'',}
+					this.handleOnChange = this.handleOnChange.bind(this);
+					this.handleOnClick = this.handleOnClick.bind(this);
+					
 				}
 				
-				handleChange(event) {
-					this.setState({inputValueFirst:event.target.value})
-				}
-			
-				handleChangeSecond(event) {
-					this.setState({inputValueSecond:event.target.value})
-				}
-				handleChangeThird(event) {
-					this.setState({inputValueThird:event.target.value})
-				}
-				handleClick() {
-					var sum = this.state.inputValueFirst+' '+this.state.inputValueSecond+' '+this.state.inputValueThird;
-					this.setState({label:sum})
+				
+				handleOnChange (event)  {
+					this.setState({inputValue:event.target.value})
 				}
 
+				handleOnClick() {
+					this.state.arrayOfNames.push(this.state.inputValue)
+					this.setState({arrayOfNames:this.state.arrayOfNames})
+				}
 				render() {
 					return (
-						<div>
-						<input type='text' onChange={this.handleChange}/>
-						<p>
-						<input type='text' onChange={this.handleChangeSecond}/>
-						</p>
-						<p>
-						<input type='text' onChange={this.handleChangeThird}/>
-						</p>
-						<button onClick={this.handleClick}>Press</button>
-						<p>{this.state.label}</p>
+						<div>	
+							<input type='text' onChange={this.handleOnChange}/>
+							<button onClick={this.handleOnClick}>Add</button>
+								<ol>
+                                        
+										{this.state.arrayOfNames.map((item,index) => (
+											<li key={index} name={item}>{item}</li>
+										))}
+									</ol>
+	
 						</div>
 					)
 				}
