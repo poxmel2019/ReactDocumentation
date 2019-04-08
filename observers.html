@@ -42,17 +42,33 @@
                 handleClick(event) {
                     this.setState({selectedName:event.target.value})
                 }
-                addObservers() {
-                    this.state.observersPlace.push(this.state.selectedName)
-                    this.setState({observersPlace:this.state.observersPlace})
-                    console.log(this.state.observers)
                 
+                addObservers(event) {
+                    /*
+                    while(!this.state.observersPlace.includes(this.state.selectedName)) {
+                        this.setState({observersPlace: [this.state.selectedName]})
+                    }
+                    */
+                    console.log(this.state.observersPlace) 
+                    // this.state.observersPlace.push(this.state.selectedName)
+                    
+                    if (!(this.state.observersPlace.includes(this.state.selectedName))) {
+                        this.setState(prevState => ({observersPlace: prevState.observersPlace.concat(this.state.selectedName)}));
+                    }
+                    else {
+                        alert('This observer has already been added!')
+                    }
+                     //, }//() => { function () {}})
+                     //}
+                  
                    
                 }
-                removeObservers() {
+                removeObservers()  {
                     this.setState({observersPlace:[]})
                     console.log(this.state.observersPlace)
                 }
+                    
+                
                 render() {
                     const list_of_observers = this.state.observers.map((name,index) => 
                         <option name={name} key={index}>{name}</option>)
