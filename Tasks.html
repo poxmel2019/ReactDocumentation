@@ -16,9 +16,10 @@
             class App extends React.Component {
 				constructor() {
 					super();
-					this.state = {label:'',inputValueFirst:'',inputValueSecond:''}
+					this.state = {label:'',inputValueFirst:'',inputValueSecond:'',inputValueThird:''}
 					this.handleChange = this.handleChange.bind(this);
-					this.handleChangeSecondNumber = this.handleChangeSecondNumber.bind(this);
+					this.handleChangeSecond = this.handleChangeSecond.bind(this);
+					this.handleChangeThird = this.handleChangeThird.bind(this);
 					this.handleClick = this.handleClick.bind(this);
 				}
 				
@@ -26,12 +27,14 @@
 					this.setState({inputValueFirst:event.target.value})
 				}
 			
-				handleChangeSecondNumber(event) {
+				handleChangeSecond(event) {
 					this.setState({inputValueSecond:event.target.value})
 				}
-
+				handleChangeThird(event) {
+					this.setState({inputValueThird:event.target.value})
+				}
 				handleClick() {
-					var sum = Number(this.state.inputValueFirst)+Number(this.state.inputValueSecond);
+					var sum = this.state.inputValueFirst+' '+this.state.inputValueSecond+' '+this.state.inputValueThird;
 					this.setState({label:sum})
 				}
 
@@ -40,7 +43,10 @@
 						<div>
 						<input type='text' onChange={this.handleChange}/>
 						<p>
-						<input type='text' onChange={this.handleChangeSecondNumber}/>
+						<input type='text' onChange={this.handleChangeSecond}/>
+						</p>
+						<p>
+						<input type='text' onChange={this.handleChangeThird}/>
 						</p>
 						<button onClick={this.handleClick}>Press</button>
 						<p>{this.state.label}</p>
