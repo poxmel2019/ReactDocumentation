@@ -12,25 +12,36 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-			// 5 | Lesson 6
+			// 6 | Lesson 6
             class App extends React.Component {
 				constructor() {
 					super();
-					this.state = {label:'',inputValue:''}
+					this.state = {label:'',inputValueFirst:'',inputValueSecond:''}
 					this.handleChange = this.handleChange.bind(this);
+					this.handleChangeSecondNumber = this.handleChangeSecondNumber.bind(this);
 					this.handleClick = this.handleClick.bind(this);
 				}
 				
 				handleChange(event) {
-					this.setState({inputValue:event.target.value})
+					this.setState({inputValueFirst:event.target.value})
 				}
+			
+				handleChangeSecondNumber(event) {
+					this.setState({inputValueSecond:event.target.value})
+				}
+
 				handleClick() {
-					this.setState({label:this.state.inputValue})
+					var sum = Number(this.state.inputValueFirst)+Number(this.state.inputValueSecond);
+					this.setState({label:sum})
 				}
+
 				render() {
 					return (
 						<div>
 						<input type='text' onChange={this.handleChange}/>
+						<p>
+						<input type='text' onChange={this.handleChangeSecondNumber}/>
+						</p>
 						<button onClick={this.handleClick}>Press</button>
 						<p>{this.state.label}</p>
 						</div>
