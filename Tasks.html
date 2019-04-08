@@ -12,37 +12,27 @@
     <body>
         <div id="root"></div>
         <script type="text/babel">
-			// 4 | Lesson 6 
+			// 5 | Lesson 6
             class App extends React.Component {
 				constructor() {
 					super();
-					this.state = {paragraph1:'',paragraph2:'',paragraph3:'',count:0,paragraphs:[]}
-					//this.handleClick = this.handleClick.bind(this);
-					this.pressSpace = this.pressSpace.bind(this);
+					this.state = {label:'',inputValue:''}
+					this.handleChange = this.handleChange.bind(this);
+					this.handleClick = this.handleClick.bind(this);
 				}
 				
-				pressSpace(event) {
-					let massiv = []
-					let $count = this.state.count;
-					if (event.key===' ') {
-						massiv.push(event.target.value)
-						this.setState({count:$count+1})
-						console.log($count)
-					}
-					switch ($count){
-						case 1: this.setState({paragraph1:massiv[0]}); break;
-						case 2: this.setState({paragraph2:massiv[1]}); break;
-						case 3: this.setState({paragraph3:massiv[2]}); break;
-					}
+				handleChange(event) {
+					this.setState({inputValue:event.target.value})
 				}
-					
+				handleClick() {
+					this.setState({label:this.state.inputValue})
+				}
 				render() {
 					return (
 						<div>
-						<input type='text' onChange={this.handleClick} onKeyPress={this.pressSpace}/>  {/*onKeyPress={this.pressSpace}/>*/}
-						<p>{this.state.paragraph1}</p>
-						<p>{this.state.paragraph2}</p>
-						<p>{this.state.paragraph3}</p>
+						<input type='text' onChange={this.handleChange}/>
+						<button onClick={this.handleClick}>Press</button>
+						<p>{this.state.label}</p>
 						</div>
 					)
 				}
