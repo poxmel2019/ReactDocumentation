@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello</title>
+        <meta charset='utf-8'>
+        <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
+        <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
+        <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+        <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script>
+        <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
+    </head>
+    <body>
+        <div id='root'></div>
+        <script type='text/babel'>
+            class Baa extends React.Component {
+                
+                render() {
+                    const listOfQuestions = this.props.questions.map(function (name,index) {
+                        return <li key={index}>{name}?</li>
+                    })
+                    return (
+                       <div>
+                       <ol>
+                       {listOfQuestions}
+                       </ol>
+                       </div> 
+                    )
+                }
+            }
+            class App extends React.Component {
+                constructor() {
+                    super();
+                    this.state = {
+                        name:'John',
+                        questions:[
+                            'What is your name',
+                            'How old are you',
+                            'Your favourite hero of fairy tale'
+
+                        ]
+                    }
+                
+                }
+                render() {
+                    return (
+                        <div>
+                        <h1>Hello!</h1>
+                        <Baa name={this.state.name} questions={this.state.questions}/>
+                        </div>
+                    )
+                }
+            }
+            ReactDOM.render(
+                <App/>,
+                document.getElementById('root'
+                )
+            ) 
+        </script>
+        
+    </body>
+</html>
