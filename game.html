@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Page</title>
+        <title>Test</title>
         <meta charset='utf-8'>
         <script src="https://npmcdn.com/react@15.3.0/dist/react.js"></script>
         <script src="https://npmcdn.com/react-dom@15.3.0/dist/react-dom.js"></script>
@@ -12,6 +12,7 @@
     <body>
         <div id='root'></div>
         <script type='text/babel'>
+            const userWork = [];
             class Baa extends React.Component {
                 constructor() {
                     super();
@@ -21,7 +22,10 @@
                         displayedAnswer:'',
                         counter:0,
                         quantityOfRightAnswers:0,
-                        bulin:false
+                        bulin:false,
+                        userAnswers:[],
+                        userWork:[]
+
                         
                     }
                     this.handleValue = this.handleValue.bind(this);
@@ -30,6 +34,7 @@
                 }
                 handleValue(event) {
                     this.setState({userAnswer:event.target.value})
+                    
                    
                 }
                 admitValue(event) {
@@ -40,11 +45,13 @@
                 submitAnswer() {
                     console.log(this.state.counter)
                     console.log(this.props.tasks[this.state.counter])
+                    
+                    this.state.userAnswers.push(`${this.props.tasks[this.state.counter]} = ${this.state.userAnswer}\n`);
                     this.setState({counter:this.state.counter+1})
                     if (this.state.userAnswer === this.props.rightAnswers[this.state.counter]) {
                         console.log('Right')
                         this.setState({
-                        quantityOfRightAnswers:this.state.quantityOfRightAnswers+1,
+                            quantityOfRightAnswers:this.state.quantityOfRightAnswers+1
                         })
                     }  
                     else {
@@ -56,15 +63,43 @@
                         +"\nWrong answers : "+(this.state.counter-this.state.quantityOfRightAnswers)});
                     }
                     
-                }
-                render() {
                     
+                }
+                showResult() {
+                    //this.setState({userWork:this.state.userAnswers});
+                    //this.state.userWork = list(this.state.userWork)
+                    console.log(this.state.counter);
+                    console.log(this.state.userAnswers);
+                    //console.log(typeof(this.state.userWork));
+                    
+                    
+                    
+
+                    
+                }
+                /*
+                componentWillUpdate(){
+                    console.log('willUpdate')
+                }
+                componentDidUpdate(){
+                    console.log('didUpdate')
+                }
+                */
+                render() {
+                    const userWork = this.state.userAnswers.map(function(item,index) {
+                        return <li name={item} key={index}>{item}</li>
+                    })
+
                     return (
                         <div>
                         <h2>{this.props.tasks[this.state.counter]}</h2>
                         <input type='text' onChange={this.handleValue} onKeyPress={this.admitValue}/>
-                        <p><button disabled={this.state.bulin} onClick={this.submitAnswer}>Submit</button></p>
+                        <p>
+                        <button disabled={this.state.bulin} onClick={this.submitAnswer}>Submit</button>
+                        <button disabled={!(this.state.bulin)} onClick={this.showResult.bind(this)}>Show work</button>
+                        </p>
                         <p>{this.state.displayedAnswer}</p>
+                        <ol>{userWork}</ol>
                         </div>
                     )
                 }
@@ -76,6 +111,13 @@
                             tasks:['1 + 1','1 - 1','1 * 1','1 / 1'],
                             rightAnswers:['2','0','1','1']
                         }
+                }
+                
+                componentWillMount() {
+                    console.log('willMount')
+                }
+                componentDidMount() {
+                    console.log('didMount')
                 }
                 render() {
                     
